@@ -1,10 +1,10 @@
 import React from "react";
 
 const Location = (props) => {
-    console.log(props);
+    const {city} = props
     return (
         <header>
-            <h1>{props.city}</h1>
+            <h1>{city}</h1>
         </header>
     )
 };

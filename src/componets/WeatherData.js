@@ -5,8 +5,11 @@ import WeatherExtraInfo from "./WeatherExtraInfo";
 
 const WeatherData = () => (
     <section>
-        <WeatherTemperature></WeatherTemperature>
-        <WeatherExtraInfo></WeatherExtraInfo>
+        <WeatherTemperature 
+            temperature={20}
+            weatherState="cloud"
+            ></WeatherTemperature>
+        <WeatherExtraInfo humidity={80} wind={"40 m/s"}/>
     </section>
 );
 

@@ -1,5 +1,5 @@
 const iconNames = {
-    sunny: "day-sunny",
+    sun: "day-sunny",
     day_sunny: "day_sunny",
     day_cloudy: "day_cloudy",
     day_cloudy_gusts: "day_cloudy_gusts",
@@ -598,6 +598,7 @@ const iconNames = {
     wu_unknown: "wu_unknown",
 }
 const iconsWeather = {
+    sun: iconNames["sun"],
     cloud: iconNames["cloud"],
     cloudy: iconNames["cloudy"],
     dust: iconNames["dust"],
@@ -617,7 +618,6 @@ const iconsWeather = {
     snow: iconNames["snow"],
     smoke: iconNames["smoke"],
     stars: iconNames["stars"],
-    sun: iconNames['day_sunny'],
     sunrise: iconNames["sunrise"],
     sunset: iconNames["sunset"],
     thunderstorm: iconNames["thunderstorm"],

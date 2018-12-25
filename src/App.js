@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <WeatherComponent/>
+        <WeatherComponent city="Buenos Aires,ar" />
       </div>
     );
   }

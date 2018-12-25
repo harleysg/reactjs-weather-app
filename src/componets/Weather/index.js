@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import weatherDataFormat from "./../../services/queryWeatherAPI";
-import { apiWeatherURL } from "../../constants/const.weatherAPI";
+import getURLWeatherByCity from "./../../services/getURLWeatherByCity";
 
 import Location from "./Location";
 import WeatherData from "./Data";
@@ -12,24 +13,29 @@ import "./weather.css";
 
 class WeatherLocation extends Component {
 
-    constructor() {
-        super();
-         
+    constructor(props) {
+        super(props);
+
+        const { city } = props;
+
         this.state = {
-            city: "Bogotá",
+            city: city,
             data: null
         };
 
     }
 
     handleUpdatetClick = (e) => {
+
+        const apiWeatherURL = getURLWeatherByCity(this.state.city)
+
         fetch(apiWeatherURL)
             .then(response => response.json())
             .then(data => this.setState(weatherDataFormat(data)));
     }
 
     componentDidMount() {
-        this.handleUpdatetClick(); 
+        this.handleUpdatetClick();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -40,14 +46,17 @@ class WeatherLocation extends Component {
         return (
             <div className="c-weather">
                 <Location city={city}></Location>
-                {data 
+                {data
                     ? <WeatherData data={data}></WeatherData>
-                    : <LinearProgress/>
+                    : <LinearProgress />
                 }
             </div>
         )
     }
 }
 
+WeatherLocation.protoTypes = {
+    city: PropTypes.string.isRequired,
+}
 
 export default WeatherLocation;

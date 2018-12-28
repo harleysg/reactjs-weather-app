@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import PropTypes from "prop-types";
 
-import weatherDataFormat from "./../../services/queryWeatherAPI";
 import getURLWeatherByCity from "./../../services/getURLWeatherByCity";
+import weatherDataFormat from "./../../services/queryWeatherAPI";
 
 import Location from "./Location";
 import WeatherData from "./Data";
+import MessageNotification from "./../MessageNotification";
 import "./weather.css";
 // https://www.udemy.com/share/100054AkAad1lUQHQ=/?xref=E0AYcFhVQ3kJSV82AT0GJVUWTx4dChQ%2BVFE=
 
@@ -19,6 +20,8 @@ class WeatherLocation extends Component {
         const { city } = props;
 
         this.state = {
+            error: null,
+            notice: {},
             city: city,
             data: null
         };
@@ -26,12 +29,22 @@ class WeatherLocation extends Component {
     }
 
     handleUpdatetClick = (e) => {
-
-        const apiWeatherURL = getURLWeatherByCity(this.state.city)
-
+        
+        const apiWeatherURL = getURLWeatherByCity(this.state.city);
+        
         fetch(apiWeatherURL)
             .then(response => response.json())
-            .then(data => this.setState(weatherDataFormat(data)));
+            .then(data => this.setState(weatherDataFormat(data)))
+            .catch(error => {
+                return this.setState({
+                    error: true,
+                    notice: {
+                        type: 'Error',
+                        title: 'Error en consulta',
+                        body: error.message
+                    }
+                })
+            })
     }
 
     componentDidMount() {
@@ -42,13 +55,17 @@ class WeatherLocation extends Component {
     }
 
     render() {
-        const { city, data } = this.state
+        const { city, data, error, notice } = this.state;
+        
         return (
             <div className="c-weather">
                 <Location city={city}></Location>
-                {data
-                    ? <WeatherData data={data}></WeatherData>
-                    : <LinearProgress />
+                {
+                    error
+                        ? <MessageNotification msg={notice}/>
+                        : data
+                            ? <WeatherData data={data}></WeatherData>
+                            : <LinearProgress />
                 }
             </div>
         )

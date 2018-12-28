@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 // import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -46,15 +46,11 @@ class App extends Component {
           </Col>
           <Col xs={12} md={6}>
             <div className="c-weather_details">
-            Detalles
-          </div>
+              Detalles
+            </div>
           </Col>
         </Row>
       </Grid>
-      // <MuiThemeProvider>
-      //   <div className="App">
-      //   </div>
-      // </MuiThemeProvider>
     );
   }
 }

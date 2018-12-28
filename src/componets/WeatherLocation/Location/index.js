@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CardHeader from "@material-ui/core/CardHeader";
 
 const Location = (props) => {
-    const {city} = props
+    const {city} = props;
+    
     return (
-        <header>
-            <h1>{city}</h1>
-        </header>
+        <CardHeader title={city} subheader="weather app"></CardHeader>
     )
 };
 

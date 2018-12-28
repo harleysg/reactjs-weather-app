@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import PropTypes from "prop-types";
 
 import getURLWeatherByCity from "./../../services/getURLWeatherByCity";
@@ -68,16 +70,18 @@ class WeatherLocation extends Component {
         const { city, data, error, notice } = this.state;
         
         return (
-            <div className="c-weather" onClick={onWeatherLocationClick}>
+            <Card onClick={onWeatherLocationClick}>
                 <Location city={city}></Location>
-                {
-                    error
-                        ? <MessageNotification msg={notice}/>
-                        : data
-                            ? <WeatherData data={data}></WeatherData>
-                            : <LinearProgress />
-                }
-            </div>
+                <CardContent>
+                    {
+                        error
+                            ? <MessageNotification msg={notice}/>
+                            : data
+                                ? <WeatherData data={data}></WeatherData>
+                                : <LinearProgress />
+                    }
+                </CardContent>
+            </Card>
         )
     }
 }

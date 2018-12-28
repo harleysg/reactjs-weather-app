@@ -9,19 +9,19 @@ const WeatherExtraInfo = ({humidity, wind}) => (
         <span>
             <span>
                 <WeatherIcons name={othersIcons['humidity']} size='lg'/>
-                {` Humedad `}
+                {` Humedad:` }
             </span>
             <span>
-                {`${humidity}`}
+                {` ${humidity}%`}
             </span>
         </span>
         <span>
             <span>
                 <WeatherIcons name={iconsWeather['windy']} size='lg'/>
-                {` Viento `}
+                {` Viento:`}
             </span>
             <span>
-                {wind}
+                {`${wind}` }
             </span>
         </span>
     </div>

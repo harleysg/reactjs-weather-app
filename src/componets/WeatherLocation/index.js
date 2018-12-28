@@ -51,14 +51,24 @@ class WeatherLocation extends Component {
         this.handleUpdatetClick();
     }
 
-    componentDidUpdate(prevProps, prevState) {
-    }
+    componentDidUpdate(prevProps, prevState) { }
 
     render() {
+        /**
+         * Comunicación entre componentes (burbujeo) ascendente
+         *
+         * 1- Definir el evento onClick y conectarle 
+         * la propiedad que el componente va a tener en la cual recibe la función.
+         * 
+         * Ej. const { onWeatherLocationClick } = this.props;
+         * ....
+         * return ( <div className="c-weather" onClick={onWeatherLocationClick}>
+        */
+        const { onWeatherLocationClick } = this.props;
         const { city, data, error, notice } = this.state;
         
         return (
-            <div className="c-weather">
+            <div className="c-weather" onClick={onWeatherLocationClick}>
                 <Location city={city}></Location>
                 {
                     error
@@ -74,6 +84,13 @@ class WeatherLocation extends Component {
 
 WeatherLocation.protoTypes = {
     city: PropTypes.string.isRequired,
+    /**
+     * Comunicación entre componentes (burbujeo) ascendente
+     *
+     * 2- Definir el tipo de parametro que vamos a recibir, en este caso @Function
+     * Ej. weatherLocationOnClick: PropTypes.func.isRequired,
+    */
+    weatherLocationOnClick: PropTypes.func.isRequired,
 }
 
 export default WeatherLocation;

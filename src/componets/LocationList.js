@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import WeatherLocation from "./WeatherLocation";
 
@@ -75,11 +76,11 @@ class LocationList extends Component {
     render() {
         const { cities } = this.state;
         return (
-            <div>
+            <Grid>
                 {
                     this.mapCitiesToComponents(cities)
                 }
-            </div>
+            </Grid>
         )
     }
 };

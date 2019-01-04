@@ -1,7 +1,7 @@
 import ConvertUnits from "convert-units";
 import { iconNames } from "../constants/const.weathersStates";
 
-const convertKelvin = kelvin => Number(ConvertUnits(kelvin).from('K').to('C').toFixed(1));
+const convertKelvin = kelvin => Number(ConvertUnits(kelvin).from('K').to('C').toFixed(0));
 
 const getNameWeatherState = (dataWeatherAPI) => {
     

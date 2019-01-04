@@ -64,15 +64,15 @@ class WeatherLocation extends Component {
          * 
          * Ej. const { onWeatherLocationClick } = this.props;
          * ....
-         * return ( <div className="c-weather" onClick={onWeatherLocationClick}>
+         * return ( <div onClick={onWeatherLocationClick}>
         */
         const { onWeatherLocationClick } = this.props;
         const { city, data, error, notice } = this.state;
         
         return (
-            <Card onClick={onWeatherLocationClick}>
+            <Card onClick={onWeatherLocationClick} className="c-weather_location-item c-location_card">
                 <Location city={city}></Location>
-                <CardContent>
+                <CardContent className="c-location_card-body">
                     {
                         error
                             ? <MessageNotification msg={notice}/>

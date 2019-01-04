@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-// import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { Grid } from 'react-flexbox-grid';
 // import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +8,7 @@ import './App.css';
 
 /** Componentes */
 import LocationList from "./componets/LocationList";
+import ForeCastExtended from './componets/ForeCastExtended'
 
 const cities = [
   'new york,usa', 
@@ -23,34 +23,47 @@ const cities = [
 
 class App extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {
+      city: null
+    }
+  }
+
   handleSelectionLocation = city => {
+    this.setState(
+      {
+        city,
+        isOpenModal: true
+      }
+    )
     console.log('handleSelectionLocation ', city);
     
   };
 
   render() {
+    const { city, isOpenModal } = this.state;
     return (
-      <Grid>
-        <Row>
-          <AppBar position="sticky">
+      <div className="c-weather">
+        <AppBar position="sticky">
+          <Grid>
             <Toolbar>
               <Typography variant="title" color="inherit">
                 Weather App
               </Typography>
             </Toolbar>
-          </AppBar>
-        </Row>
-        <Row>
-          <Col xs={12} md={6}>
-            <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation} />
-          </Col>
-          <Col xs={12} md={6}>
-            <div className="c-weather_details">
-              Detalles
-            </div>
-          </Col>
-        </Row>
-      </Grid>
+          </Grid>
+        </AppBar>
+        <Grid>
+          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation} />
+          {
+            city === null
+              ? null
+              : <ForeCastExtended city={city} isOpen={isOpenModal}/>
+          }
+        </Grid>
+      </div>
     );
   }
 }

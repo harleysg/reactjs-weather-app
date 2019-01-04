@@ -6,7 +6,7 @@ const Location = (props) => {
     const {city} = props;
     
     return (
-        <CardHeader title={city} subheader="weather app"></CardHeader>
+        <CardHeader className="c-location_card-header" title={city} subheader="weather app"></CardHeader>
     )
 };
 

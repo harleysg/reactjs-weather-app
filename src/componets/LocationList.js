@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
-import { Grid } from 'react-flexbox-grid';
+// import { Grid } from 'react-flexbox-grid';
 
 import WeatherLocation from "./WeatherLocation";
 
+import "./LocationList.css"
 
 /**
  * Versión Funcional
@@ -62,7 +63,7 @@ class LocationList extends Component {
         (city, index) => (
             <WeatherLocation 
                 city={city} 
-                key={`index_${city}`} 
+                key={`index_${city}`}
                 /** 
                  * Comunicación entre componentes (burbujeo) ascendente
                  * 
@@ -76,11 +77,11 @@ class LocationList extends Component {
     render() {
         const { cities } = this.state;
         return (
-            <Grid>
+            <div className="c-weather_location">
                 {
                     this.mapCitiesToComponents(cities)
                 }
-            </Grid>
+            </div>
         )
     }
 };

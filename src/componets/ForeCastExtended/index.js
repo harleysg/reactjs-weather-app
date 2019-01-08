@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 
 class ForeCastExtended extends Component {
@@ -15,10 +16,17 @@ class ForeCastExtended extends Component {
         
         if( this.state.isOpen === true ) {
             this.setState({
-                isOpen: false
-            }) ;
+                isOpen: !this.state.isOpen
+            });
         }
-        console.log('clicked', this.state.isOpen);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.isOpen !== this.props.isOpen) {
+            this.setState({
+                isOpen: !this.state.isOpen
+            });
+        }
     }
 
     render() {
@@ -27,11 +35,21 @@ class ForeCastExtended extends Component {
         const { isOpen } = this.state
         
         return (
-            <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`} onClick={this.handleCloseModal}>
-                Holaa {city}
-            </div>
+            <Fragment>
+                <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`}>
+                    <div className={`c-weather_details-overlay`} onClick={this.handleCloseModal}></div>
+                    <div className={`c-weather_details-content`}>
+                        Holaa {city}
+                    </div>
+                </div>
+            </Fragment>
         );
     }
+}
+
+ForeCastExtended.propTypes = {
+    city: PropTypes.string.isRequired,
+    isOpen: PropTypes.bool.isRequired
 }
 
 export default ForeCastExtended;

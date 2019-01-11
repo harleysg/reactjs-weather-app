@@ -28,11 +28,12 @@ class ModalUI extends Component {
 
     render() {
         const { isOpen } = this.state;
+        const {content} = this.props.content;
         return(
             <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`}>
                 <div className={`c-weather_details-overlay`} onClick={this.handleCloseModal}></div>
                 <div className={`c-weather_details-content`}>
-                    {/* {props.children} */}
+                    {content}
                 </div>
             </div>
         )

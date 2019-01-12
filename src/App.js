@@ -27,7 +27,8 @@ class App extends Component {
     super();
 
     this.state = {
-      city: null
+      city: null,
+      isOpenModal: false
     }
   }
 
@@ -35,7 +36,7 @@ class App extends Component {
     this.setState(
       {
         city,
-        isOpenModal: true
+        isOpenModal: !this.state.isOpenModal
       }
     )
     console.log('handleSelectionLocation ', city);

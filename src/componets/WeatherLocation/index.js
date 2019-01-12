@@ -13,7 +13,6 @@ import MessageNotification from "./../MessageNotification";
 import "./weather.css";
 // https://www.udemy.com/share/100054AkAad1lUQHQ=/?xref=E0AYcFhVQ3kJSV82AT0GJVUWTx4dChQ%2BVFE=
 
-
 class WeatherLocation extends Component {
 
     constructor(props) {

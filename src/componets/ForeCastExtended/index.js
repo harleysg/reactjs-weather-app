@@ -1,6 +1,21 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Grid } from 'react-flexbox-grid';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 
+import ForeCastItem from '../ForeCastItem'
+
+const days = [
+    'Lunes',
+    'martes',
+    'Miercoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo',
+]
 
 class ForeCastExtended extends Component {
     constructor(props) {
@@ -21,6 +36,10 @@ class ForeCastExtended extends Component {
         }
     }
 
+    renderForecasItemDays() {
+        return days.map(day => (<ForeCastItem key={day} weekDay={day} hour={12}></ForeCastItem>))
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.isOpen !== this.props.isOpen) {
             this.setState({
@@ -38,8 +57,19 @@ class ForeCastExtended extends Component {
             <Fragment>
                 <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`}>
                     <div className={`c-weather_details-overlay`} onClick={this.handleCloseModal}></div>
-                    <div className={`c-weather_details-content`}>
-                        Holaa {city}
+                    <div className={`c-weather_details-body`}>
+                        <AppBar position="sticky">
+                            <Grid>
+                                <Toolbar>
+                                    <Typography variant="subtitle1" color="inherit">
+                                        {city}
+                                    </Typography>
+                                </Toolbar>
+                            </Grid>
+                        </AppBar>
+                        <Grid className={`c-weather_details-content`}>
+                            {this.renderForecasItemDays()}
+                        </Grid>
                     </div>
                 </div>
             </Fragment>

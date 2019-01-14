@@ -23,15 +23,20 @@
     justify-content: center;
     align-items: center;
 }
-.c-weather_details-content {
+.c-weather_details-body {
     position: relative;
     z-index: 1;
     margin-top: 4.5rem;
     width: 100%;
     max-width: 50em;
     min-height: 25em;
+    max-height: calc(100vh - 4rem);
     background-color: #fff;
     box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.c-weather_details-content {
+    overflow: scroll;
+    height: 100vh;
 }
 .c-weather_details-overlay {
     position: absolute;

@@ -59,9 +59,7 @@ class App extends Component {
         <Grid>
           <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation} />
           {
-            city === null
-              ? null
-              : <ForeCastExtended city={city} isOpen={isOpenModal}/>
+            city && <ForeCastExtended city={city} isOpen={isOpenModal}/>
           }
         </Grid>
       </div>

@@ -1,7 +1,16 @@
-import { url_base, api_key } from "../constants/const.weatherAPI";
+import { url_weather, api_key, url_forecast } from "../constants/const.weatherAPI";
 
-const getURLWeatherByCity = city => {
-    return `${url_base}?q=${city}&appid=${api_key}`
+const getURLWeatherByCity = cityName => {
+    return `${url_weather}?q=${cityName}&appid=${api_key}`
 }
 
-export default getURLWeatherByCity;
+const getForecastByCity = cityID => {
+    return `${url_forecast}?id=${cityID}&appid=${api_key}`
+}
+
+export default {
+    get: {
+        weatherCity: getURLWeatherByCity,
+        forcastCity: getForecastByCity,
+    }
+};

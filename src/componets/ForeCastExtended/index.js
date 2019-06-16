@@ -1,11 +1,25 @@
 import React, { Component, Fragment } from 'react';
+
 import PropTypes from 'prop-types';
 import { Grid } from 'react-flexbox-grid';
+
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-
+/* SERVICE */
+import { url_forecast, api_key } from '../../constants/const.weatherAPI';
+import { citiesID } from '../../constants/const.cityList';
+import fetchService from '../../services/service.fetch';
+/* COMPONENTS */
 import ForeCastItem from '../ForeCastItem'
+
+(function (city) {
+    fetchService(`${url_forecast}?id=${city[1].id}&appid=${api_key}`)
+    .then(data => {
+        console.log(data);
+    })
+    .catch(e => console.error(e))
+})(citiesID)
 
 const days = [
     'Lunes',
@@ -28,7 +42,6 @@ class ForeCastExtended extends Component {
     }
 
     handleCloseModal = () => {
-        
         if( this.state.isOpen === true ) {
             this.setState({
                 isOpen: !this.state.isOpen
@@ -68,7 +81,11 @@ class ForeCastExtended extends Component {
                             </Grid>
                         </AppBar>
                         <Grid className={`c-weather_details-content`}>
-                            {this.renderForecasItemDays()}
+                            {
+                                (city)
+                                    ? this.renderForecasItemDays()
+                                    : 'cargando...'
+                            }
                         </Grid>
                     </div>
                 </div>

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import getURLWeatherByCity from "./../../services/getURLWeatherByCity";
-// import weatherDataFormat from '../../services/queryWeatherAPI'
-
 import WeatherData from "../WeatherLocation/Data";
 
 const qaData = {

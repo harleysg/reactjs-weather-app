@@ -4,22 +4,13 @@ import { Grid } from 'react-flexbox-grid';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+/** STYLES */
 import './App.css';
-
+/** Constants */
+import { citiesName } from "./constants/const.cityList";
 /** Componentes */
 import LocationList from "./componets/LocationList";
 import ForeCastExtended from './componets/ForeCastExtended'
-
-const cities = [
-  'new york,usa', 
-  'miami,usa',
-  "roma,it",
-  "hawaii,us",
-  "Bogota,co",
-  "Washington,us",
-  "Buenos aires,ar",
-  "mexico,mx",
-]
 
 class App extends Component {
 
@@ -57,7 +48,7 @@ class App extends Component {
           </Grid>
         </AppBar>
         <Grid>
-          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation} />
+          <LocationList cities={citiesName} onSelectedLocation={this.handleSelectionLocation} />
           {
             city && <ForeCastExtended city={city} isOpen={isOpenModal}/>
           }

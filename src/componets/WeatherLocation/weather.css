@@ -1,11 +1,7 @@
 .c-weather {
     width: 100%;
-}
-
-@media screen and (max-width: 48rem) {
-    .c-weather_location {
-        overflow-y: initial;
-    }
+    display: grid;
+    grid-template: 4rem 1fr / 1fr;
 }
 
 .c-weather_details {

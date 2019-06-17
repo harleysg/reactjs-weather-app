@@ -8,18 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 /* SERVICE */
 import { url_forecast, api_key } from '../../constants/const.weatherAPI';
-import { citiesID } from '../../constants/const.cityList';
 import fetchService from '../../services/service.fetch';
 /* COMPONENTS */
 import ForeCastItem from '../ForeCastItem'
 
-(function (city) {
-    fetchService(`${url_forecast}?id=${city[1].id}&appid=${api_key}`)
-    .then(data => {
-        console.log(data);
-    })
-    .catch(e => console.error(e))
-})(citiesID)
 
 const days = [
     'Lunes',
@@ -37,14 +29,17 @@ class ForeCastExtended extends Component {
 
         this.state = {
             isOpen: this.props.isOpen || false,
-            city: null
+            cityId: this.props.cityId,
+            data: null
         }
     }
 
     handleCloseModal = () => {
         if( this.state.isOpen === true ) {
             this.setState({
-                isOpen: !this.state.isOpen
+                isOpen: !this.state.isOpen,
+                data: null,
+                cityId: null,
             });
         }
     }
@@ -53,7 +48,24 @@ class ForeCastExtended extends Component {
         return days.map(day => (<ForeCastItem key={day} weekDay={day} hour={12}></ForeCastItem>))
     }
 
+    handleFetchForUpdate(idCity) {
+        fetchService(`${url_forecast}?id=${idCity}&appid=${api_key}`)
+        .then(data => {
+            this.setState({data: data, cityId: idCity});
+        })
+        .catch(e => console.error(e));
+    }
+    
+    componentDidMount() {
+        const { cityId } = this.state
+        this.handleFetchForUpdate(cityId);
+    }
+
     componentDidUpdate(prevProps, prevState) {
+        const { cityId } = this.props;
+        if (prevProps.cityId !== cityId) {
+            this.handleFetchForUpdate(cityId);
+        }
         if (prevProps.isOpen !== this.props.isOpen) {
             this.setState({
                 isOpen: !this.state.isOpen
@@ -63,9 +75,9 @@ class ForeCastExtended extends Component {
 
     render() {
 
-        const { city } = this.props;
-        const { isOpen } = this.state
-        
+        const { data } = this.state;
+        const { isOpen } = this.state;
+        // console.log(data);
         return (
             <Fragment>
                 <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`}>
@@ -75,27 +87,24 @@ class ForeCastExtended extends Component {
                             <Grid>
                                 <Toolbar>
                                     <Typography variant="subtitle1" color="inherit">
-                                        {city}
+                                        {data ? `${data.city.name}, ${data.city.country}`  : 'cargando....'}
                                     </Typography>
                                 </Toolbar>
                             </Grid>
                         </AppBar>
                         <Grid className={`c-weather_details-content`}>
-                            {
-                                (city)
-                                    ? this.renderForecasItemDays()
-                                    : 'cargando...'
-                            }
+                            { data ? this.renderForecasItemDays() : 'cargando....' }
                         </Grid>
                     </div>
                 </div>
             </Fragment>
         );
+        
     }
 }
 
 ForeCastExtended.propTypes = {
-    city: PropTypes.string.isRequired,
+    cityId: PropTypes.number.isRequired,
     isOpen: PropTypes.bool.isRequired
 }
 

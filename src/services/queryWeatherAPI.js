@@ -30,15 +30,22 @@ const getNameWeatherState = (dataWeatherAPI) => {
 
 const weatherDataFormat = (dataWeatherAPI) => {
     const statusRequest = dataWeatherAPI;
-
+    // console.log(statusRequest);
+    
     if (statusRequest !== 404) {
         const { humidity, temp } = dataWeatherAPI.main;
         const { speed } = dataWeatherAPI.wind;
         const name = dataWeatherAPI.name;
+        const id = dataWeatherAPI.id;
+        const country = dataWeatherAPI.sys.country;
         const state = getNameWeatherState(dataWeatherAPI)
     
         return {
-            city: name,
+            city: {
+                name: name,
+                id,
+                country
+            },
             data: {
                 temperature: convertKelvin(temp),
                 weatherState: state,

@@ -31,11 +31,16 @@ class WeatherLocation extends Component {
 
     }
 
-    handleUpdatetClick = (e) => {
+    handleUpdateData = (e) => {
+        // console.log(this.state.city);
         
-        const apiWeatherURL = weatherAPI.get.weatherCity(this.state.city);
+        const apiWeatherURL = weatherAPI.get.weatherCity(this.state.city.id);
         fetchService(apiWeatherURL)
-            .then(data => this.setState(weatherDataFormat(data)))
+            .then(data => {
+                // weatherDataFormat(data)
+                // console.log(this.state.city, data, weatherDataFormat(data));
+                this.setState( weatherDataFormat(data))
+            })
             .catch(error => {
                 return this.setState({
                     error: true,
@@ -49,7 +54,7 @@ class WeatherLocation extends Component {
     }
 
     componentDidMount() {
-        this.handleUpdatetClick();
+        this.handleUpdateData();
     }
 
     componentDidUpdate(prevProps, prevState) { }
@@ -69,8 +74,9 @@ class WeatherLocation extends Component {
         const { city, data, error, notice } = this.state;
         
         return (
+            // <li>{city.name}</li>
             <Card onClick={onWeatherLocationClick} className="c-weather_location-item c-location_card">
-                <Location city={city}></Location>
+                <Location city={city.name}></Location>
                 <CardContent className="c-location_card-body">
                     {
                         error
@@ -86,7 +92,7 @@ class WeatherLocation extends Component {
 }
 
 WeatherLocation.protoTypes = {
-    city: PropTypes.string.isRequired,
+    city: PropTypes.object.isRequired,
     /**
      * Comunicación entre componentes (burbujeo) ascendente
      *

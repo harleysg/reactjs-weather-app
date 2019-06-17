@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardHeader from "@material-ui/core/CardHeader";
 
+import './location.css'
+
 const Location = (props) => {
     const {city} = props;
     

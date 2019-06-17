@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 /** STYLES */
 import './App.css';
 /** Constants */
-import { citiesName } from "./constants/const.cityList";
+import { citiesID } from "./constants/const.cityList";
 /** Componentes */
 import LocationList from "./componets/LocationList";
 import ForeCastExtended from './componets/ForeCastExtended'
@@ -24,20 +24,22 @@ class App extends Component {
   }
 
   handleSelectionLocation = city => {
-    this.setState(
-      {
-        city,
-        isOpenModal: !this.state.isOpenModal
-      }
-    )
-    console.log('handleSelectionLocation ', city);
+    console.log('App', city);
     
-  };
-
+    this.setState( {
+      city,
+      isOpenModal: !this.state.isOpenModal
+    } )
+      // console.log('handleSelectionLocation ', city);
+      
+    };
+  
   render() {
-    const { city, isOpenModal } = this.state;
+    const { city } = this.state;
+    const { isOpenModal } = this.state;
+    // console.log('App Render', city, city ? city.id: null);
     return (
-      <div className="c-weather">
+      <div className="c-weather" data-open={isOpenModal}>
         <AppBar position="sticky">
           <Grid>
             <Toolbar>
@@ -48,9 +50,11 @@ class App extends Component {
           </Grid>
         </AppBar>
         <Grid>
-          <LocationList cities={citiesName} onSelectedLocation={this.handleSelectionLocation} />
+          <LocationList cities={citiesID} onSelectedLocation={this.handleSelectionLocation} />
           {
-            city && <ForeCastExtended city={city} isOpen={isOpenModal}/>
+            city
+              ? <ForeCastExtended cityId={city.id} isOpen={isOpenModal}/>
+              : null
           }
         </Grid>
       </div>

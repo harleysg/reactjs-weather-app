@@ -1,47 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 // import { Grid } from 'react-flexbox-grid';
 
 import WeatherLocation from "./WeatherLocation";
 
 import "./LocationList.css"
 
-/**
- * Versión Funcional
- * 
-    const LocationList = ({ cities, onSelectedLocation }) => {
-    
-        const handelWeatherLocationClick = (city) => {
-            console.log('handelWeatherLocationClick ', city);
-            onSelectedLocation(city)
-
-        };
-        const mapCitiesToComponents = (cities) => ( cities.map(
-            (city, index) => (
-                <WeatherLocation
-                    city={city}
-                    key={`index_${city}`}
-                    onWeatherLocationClick={() => this.handelWeatherLocationClick(city) }
-                />
-            )
-        ));
-
-        return (
-            <div>
-                {
-                    mapCitiesToComponents(cities)
-                }
-            </div>
-        )
-    }
- */
-
 class LocationList extends Component {
     constructor(props) {
         super(props);
-        
         this.state = {
-            cities : props.cities
+            cities : props.cities,
         }
     };
     /**
@@ -60,10 +29,13 @@ class LocationList extends Component {
     };
 
     mapCitiesToComponents = (cities) => ( cities.map(
-        (city, index) => (
+        (city, index) => {
+            // console.log(city);
+            // return <li key={`index_${index}`}>{city.name}</li>
+            return (
             <WeatherLocation 
                 city={city} 
-                key={`index_${city}`}
+                key={`index_${city.name}_${city.id}`}
                 /** 
                  * Comunicación entre componentes (burbujeo) ascendente
                  * 
@@ -71,7 +43,7 @@ class LocationList extends Component {
                 */
                 onWeatherLocationClick={() => this.handelWeatherLocationClick(city) }
             />
-        )
+        )}
     ));
 
     render() {

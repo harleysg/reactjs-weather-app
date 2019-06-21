@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-// import { Grid } from 'react-flexbox-grid';
 
 import WeatherLocation from "./WeatherLocation";
 
@@ -16,29 +15,27 @@ class LocationList extends Component {
     /**
      * Comunicación entre componentes (burbujeo) ascendente
      *
-     * 4- Definir la función que ejecuta el componente 
+     * 4- Definir la función que ejecuta el componente
      * y en esta ejecutar la propiedad que recibira una función
      * conectandose así con el componente padre.
-     * 
+     *
      * Ej. this.props.onSelectedLocation(city)
     */
     handelWeatherLocationClick = (city) => {
         console.log('handelWeatherLocationClick ', city);
         this.props.onSelectedLocation(city)
-        
+
     };
 
     mapCitiesToComponents = (cities) => ( cities.map(
         (city, index) => {
-            // console.log(city);
-            // return <li key={`index_${index}`}>{city.name}</li>
             return (
-            <WeatherLocation 
-                city={city} 
+            <WeatherLocation
+                city={city}
                 key={`index_${city.name}_${city.id}`}
-                /** 
+                /**
                  * Comunicación entre componentes (burbujeo) ascendente
-                 * 
+                 *
                  * 3- Incluir la propiedad definida en el componente y pasarle la función esperada.
                 */
                 onWeatherLocationClick={() => this.handelWeatherLocationClick(city) }
@@ -63,7 +60,7 @@ LocationList.propTypes = {
     /**
      * Comunicación entre componentes (burbujeo) ascendente
      *
-     * 5- Definir el tipo de parametro que vamos a recibir, en este caso @Funcion 
+     * 5- Definir el tipo de parametro que vamos a recibir, en este caso @Funcion
      * Ej. onSelectedLocation: PropTypes.func
     */
     onSelectedLocation: PropTypes.func,

@@ -31,14 +31,10 @@ class WeatherLocation extends Component {
 
     }
 
-    handleUpdateData = (e) => {
-        // console.log(this.state.city);
-        
+    handleUpdateData = (e) => {        
         const apiWeatherURL = weatherAPI.get.weatherCity(this.state.city.id);
         fetchService(apiWeatherURL)
             .then(data => {
-                // weatherDataFormat(data)
-                // console.log(this.state.city, data, weatherDataFormat(data));
                 this.setState( weatherDataFormat(data))
             })
             .catch(error => {

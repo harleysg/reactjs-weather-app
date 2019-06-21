@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 /* SERVICE */
 import { url_forecast, api_key } from '../../constants/const.weatherAPI';
 import fetchService from '../../services/service.fetch';
+import transformForcastQueryService from '../../services/service.transformForcastQuery';
 /* COMPONENTS */
 import ForeCastItem from '../ForeCastItem'
 
@@ -29,8 +30,12 @@ class ForeCastExtended extends Component {
 
         this.state = {
             isOpen: this.props.isOpen || false,
-            cityId: this.props.cityId,
-            data: null
+            city: {
+                cityId: this.props.cityId,
+                name: '',
+                country: '',
+                data: null,
+            }
         }
     }
 
@@ -38,8 +43,10 @@ class ForeCastExtended extends Component {
         if( this.state.isOpen === true ) {
             this.setState({
                 isOpen: !this.state.isOpen,
-                data: null,
-                cityId: null,
+                city: {
+                    cityId: null,
+                    data: null
+                },
             });
         }
     }
@@ -50,14 +57,22 @@ class ForeCastExtended extends Component {
 
     handleFetchForUpdate(idCity) {
         fetchService(`${url_forecast}?id=${idCity}&appid=${api_key}`)
-        .then(data => {
-            this.setState({data: data, cityId: idCity});
+        .then(resp => {
+            const data = transformForcastQueryService(resp);
+            // console.log(resp, data);
+            
+            this.setState({city: {
+                data: data,
+                cityId: idCity,
+                name: resp.city.name,
+                country: resp.city.country,
+            }});
         })
         .catch(e => console.error(e));
     }
     
     componentDidMount() {
-        const { cityId } = this.state
+        const { cityId } = this.state.city
         this.handleFetchForUpdate(cityId);
     }
 
@@ -75,7 +90,7 @@ class ForeCastExtended extends Component {
 
     render() {
 
-        const { data } = this.state;
+        const { data, name, country } = this.state.city;
         const { isOpen } = this.state;
         // console.log(data);
         return (
@@ -87,7 +102,7 @@ class ForeCastExtended extends Component {
                             <Grid>
                                 <Toolbar>
                                     <Typography variant="subtitle1" color="inherit">
-                                        {data ? `${data.city.name}, ${data.city.country}`  : 'cargando....'}
+                                        {data ? `${name}, ${country}`  : 'cargando....'}
                                     </Typography>
                                 </Toolbar>
                             </Grid>

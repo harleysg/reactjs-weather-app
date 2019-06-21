@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import 'ModalUI.css'
+import './ModalUI.css'
+
+import bodyScrollService from "./../../services/service.bodyScroll";
 
 class ModalUI extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class ModalUI extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.isOpen !== this.props.isOpen) {
+            bodyScrollService(this.props.isOpen);
             this.setState({
                 isOpen: !this.state.isOpen
             });
@@ -28,12 +31,16 @@ class ModalUI extends Component {
 
     render() {
         const { isOpen } = this.state;
-        const {content} = this.props.content;
+        const {content} = this.props;
         return(
-            <div className={`c-weather_details ${isOpen ? 'is-visible' : ''}`}>
-                <div className={`c-weather_details-overlay`} onClick={this.handleCloseModal}></div>
-                <div className={`c-weather_details-content`}>
-                    {content}
+            <div className={`ui-modal ${isOpen ? 'is-visible' : ''}`}>
+                <div className={`ui-modal_overlay`} onClick={this.handleCloseModal}></div>
+                <div className={`ui-modal_content`}>
+                    {
+                        content
+                            ? content
+                            : 'Empty modal'
+                    }
                 </div>
             </div>
         )

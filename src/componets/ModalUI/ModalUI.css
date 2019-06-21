@@ -1,0 +1,30 @@
+.ui-modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+.ui-modal.is-visible{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ui-modal_overlay{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.2);
+}
+.ui-modal_content{
+    height: 100vh;
+    max-height: 60%;
+    width: 90%;
+    background-color: white;
+    position: relative;
+}

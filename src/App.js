@@ -10,56 +10,58 @@ import './App.css';
 import { citiesID } from "./constants/const.cityList";
 /** Componentes */
 import LocationList from "./componets/LocationList";
-import ForeCastExtended from './componets/ForeCastExtended'
+import ForeCastExtended from './componets/ForeCastExtended';
 
 class App extends Component {
 
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    this.state = {
-      city: null,
-      isOpenModal: false
+        this.state = {
+        city: null,
+        isOpenModal: false
+        }
     }
-  }
+    handledModal = stateModal => {
+        if (stateModal === false) {
+        this.setState({isOpenModal: false})
+        } else {
+        this.setState({isOpenModal: true})
+        }
+    }
 
-  handleSelectionLocation = city => {
-    console.log('App', city);
-    
-    this.setState( {
-      city,
-      isOpenModal: !this.state.isOpenModal
-    } )
-      // console.log('handleSelectionLocation ', city);
-      
+    handleSelectionLocation = city => {
+        this.setState( {
+        city,
+        isOpenModal: true
+        })
     };
-  
-  render() {
-    const { city } = this.state;
-    const { isOpenModal } = this.state;
-    // console.log('App Render', city, city ? city.id: null);
-    return (
-      <div className="c-weather" data-open={isOpenModal}>
-        <AppBar position="sticky">
-          <Grid>
-            <Toolbar>
-              <Typography variant="title" color="inherit">
-                Weather App
-              </Typography>
-            </Toolbar>
-          </Grid>
-        </AppBar>
-        <Grid>
-          <LocationList cities={citiesID} onSelectedLocation={this.handleSelectionLocation} />
-          {
-            city
-              ? <ForeCastExtended cityId={city.id} isOpen={isOpenModal}/>
-              : null
-          }
-        </Grid>
-      </div>
-    );
-  }
+
+    render() {
+        const { city } = this.state;
+        const { isOpenModal } = this.state;
+        return (
+            <div className="c-weather" data-open={isOpenModal}>
+                <AppBar position="sticky">
+                    <Grid>
+                    <Toolbar>
+                        <Typography variant="title" color="inherit">
+                        Weather App
+                        </Typography>
+                    </Toolbar>
+                    </Grid>
+                </AppBar>
+                <Grid>
+                    <LocationList cities={citiesID} onSelectedLocation={this.handleSelectionLocation} />
+                    {
+                    city
+                        ? <ForeCastExtended cityID={city.id} isOpen={isOpenModal} onHandledModal={this.handledModal}/>
+                        : null
+                    }
+                </Grid>
+            </div>
+        );
+    }
 }
 
 export default App;

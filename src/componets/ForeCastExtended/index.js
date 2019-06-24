@@ -22,16 +22,6 @@ import transformForcastQueryService from '../../services/service.transformForcas
 /* COMPONENTS */
 import ForeCastItem from '../ForeCastItem'
 
-const days = [
-    'Lunes',
-    'martes',
-    'Miercoles',
-    'Jueves',
-    'Viernes',
-    'Sábado',
-    'Domingo',
-];
-
 class ForeCastExtended extends Component {
     constructor(props) {
         super(props);
@@ -52,8 +42,13 @@ class ForeCastExtended extends Component {
         this.props.onHandledModal(false);
     }
 
-    renderForecasItemDays() {
-        return days.map(day => (<ForeCastItem key={day} weekDay={day} hour={12}></ForeCastItem>))
+    renderForecasItemDays(data) {
+        return data.map(day => ( <ForeCastItem 
+            key={`${day.weekDay}-${day.hour}`} 
+            weekDay={day.weekDay} 
+            hour={day.hour}
+            data={day.data}/>)
+        )
     }
 
     handleFetchForUpdate(idCity) {
@@ -117,21 +112,21 @@ class ForeCastExtended extends Component {
                                     </Grid>
                                 </AppBar>
                                 <Grid className={`c-weather_details-content`}>
-                                    { data ? this.renderForecasItemDays() : 'cargando....' }
+                                    { data ? this.renderForecasItemDays(data) : 'cargando....' }
                                 </Grid>
                             </Fragment>
-                        : <Fragment>
-                            <Grid>
-                                <Toolbar>
-                                    <Typography variant="h5" color="inherit" className='u-flexGrow'>
-                                        cargando....
-                                    </Typography>
-                                </Toolbar>
-                            </Grid>
-                            <Grid className={`c-weather_details-content`}>
-                                <LinearProgress />
-                            </Grid>
-                        </Fragment>
+                        :   <Fragment>
+                                <Grid>
+                                    <Toolbar>
+                                        <Typography variant="h5" color="inherit" className='u-flexGrow'>
+                                            cargando....
+                                        </Typography>
+                                    </Toolbar>
+                                </Grid>
+                                <Grid className={`c-weather_details-content`}>
+                                    <LinearProgress />
+                                </Grid>
+                            </Fragment>
                         }
                 </div>
             </div>

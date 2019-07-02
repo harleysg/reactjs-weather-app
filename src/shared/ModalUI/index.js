@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './ModalUI.css'
 
-import bodyScrollService from "./../../services/service.bodyScroll";
+import bodyScrollService from "services/service.bodyScroll";
 
 class ModalUI extends Component {
     constructor(props) {

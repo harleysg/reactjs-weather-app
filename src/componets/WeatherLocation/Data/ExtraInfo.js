@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import WeatherIcons from "react-weathericons";
-import { iconsWeather, othersIcons } from "../../../constants/const.weathersStates";
+import { iconsWeather, othersIcons } from "constants/const.weathersStates";
 import "./data.css";
 
 const WeatherExtraInfo = ({humidity, wind}) => (

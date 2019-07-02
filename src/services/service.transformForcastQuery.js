@@ -1,8 +1,8 @@
 import moment from 'moment';
-import weatherDataFormat from './queryWeatherAPI'
+import weatherDataFormat from './service.filterWeatherData'
 
 const transformForcastQueryService = data => (
-    
+
     data.list.filter(item => (
             moment.unix(item.dt).utc().hour() === 6 ||
             moment.unix(item.dt).utc().hour() === 12 ||

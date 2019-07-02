@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+/**@libraries */
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-
-import weatherAPI from "./../../services/getURLWeatherByCity";
-import fetchService from "./../../services/service.fetch";
-import weatherDataFormat from "./../../services/queryWeatherAPI";
-
+/**@services */
+import weatherAPI from "services/getURLWeatherByCity";
+import fetchService from "services/service.fetch";
+import weatherDataFormat from "services/service.filterWeatherData";
+/**@components */
 import Location from "./Location";
 import WeatherData from "./Data";
-import MessageNotification from "./../MessageNotification";
+import MessageNotification from 'componets/MessageNotification';
+/**@styles */
 import "./weather.css";
 // https://www.udemy.com/share/100054AkAad1lUQHQ=/?xref=E0AYcFhVQ3kJSV82AT0GJVUWTx4dChQ%2BVFE=
 
@@ -31,7 +32,7 @@ class WeatherLocation extends Component {
 
     }
 
-    handleUpdateData = (e) => {        
+    handleUpdateData = (e) => {
         const apiWeatherURL = weatherAPI.get.weatherCity(this.state.city.id);
         fetchService(apiWeatherURL)
             .then(data => {
@@ -59,16 +60,16 @@ class WeatherLocation extends Component {
         /**
          * Comunicación entre componentes (burbujeo) ascendente
          *
-         * 1- Definir el evento onClick y conectarle 
+         * 1- Definir el evento onClick y conectarle
          * la propiedad que el componente va a tener en la cual recibe la función.
-         * 
+         *
          * Ej. const { onWeatherLocationClick } = this.props;
          * ....
          * return ( <div onClick={onWeatherLocationClick}>
         */
         const { onWeatherLocationClick } = this.props;
         const { city, data, error, notice } = this.state;
-        
+
         return (
             // <li>{city.name}</li>
             <Card onClick={onWeatherLocationClick} className="c-weather_location-item c-location_card">

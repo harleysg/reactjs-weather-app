@@ -1,5 +1,5 @@
 import ConvertUnits from "convert-units";
-import { iconNames } from "../constants/const.weathersStates";
+import { iconNames } from "constants/const.weathersStates";
 
 const convertKelvin = kelvin => Number(ConvertUnits(kelvin).from('K').to('C').toFixed(0));
 

@@ -15,10 +15,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Icon from '@material-ui/core/Icon';
 import LinearProgress from "@material-ui/core/LinearProgress";
 /** @services */
-import { url_forecast, api_key } from '../../constants/const.weatherAPI';
-import fetchService from '../../services/service.fetch';
-import bodyScrollService from '../../services/service.bodyScroll';
-import transformForcastQueryService from '../../services/service.transformForcastQuery';
+import { url_forecast, api_key } from 'constants/const.weatherAPI';
+import fetchService from 'services/service.fetch';
+import bodyScrollService from 'services/service.bodyScroll';
+import transformForcastQueryService from 'services/service.transformForcastQuery';
 /* COMPONENTS */
 import ForeCastItem from '../ForeCastItem'
 
@@ -43,9 +43,9 @@ class ForeCastExtended extends Component {
     }
 
     renderForecasItemDays(data) {
-        return data.map(day => ( <ForeCastItem 
-            key={`${day.weekDay}-${day.hour}`} 
-            weekDay={day.weekDay} 
+        return data.map(day => ( <ForeCastItem
+            key={`${day.weekDay}-${day.hour}`}
+            weekDay={day.weekDay}
             hour={day.hour}
             data={day.data}/>)
         )

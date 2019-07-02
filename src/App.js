@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+/**@libraries */
 import { Grid } from 'react-flexbox-grid';
-// import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-/** STYLES */
+/** @styles */
 import './App.css';
-/** Constants */
+/** @constants */
 import { citiesID } from "./constants/const.cityList";
-/** Componentes */
+/** @componentes */
 import LocationList from "./componets/LocationList";
 import ForeCastExtended from './componets/ForeCastExtended';
 

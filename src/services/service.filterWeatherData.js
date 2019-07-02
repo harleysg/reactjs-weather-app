@@ -4,10 +4,10 @@ import { iconNames } from "../constants/const.weathersStates";
 const convertKelvin = kelvin => Number(ConvertUnits(kelvin).from('K').to('C').toFixed(0));
 
 const getNameWeatherState = (dataWeatherAPI) => {
-    
+
     let idIcon = dataWeatherAPI.weather[0].id;
     let iconsWeather = iconNames
-    
+
     if (idIcon < 300) {
         return iconsWeather['thunderstorm']
     } else if (idIcon < 400){
@@ -28,36 +28,25 @@ const getNameWeatherState = (dataWeatherAPI) => {
 
 };
 
-const weatherDataFormat = (dataWeatherAPI) => {
-    const statusRequest = dataWeatherAPI;
-    // console.log(statusRequest);
-    
-    if (statusRequest !== 404) {
-        const { humidity, temp } = dataWeatherAPI.main;
-        const { speed } = dataWeatherAPI.wind;
-        // const name = dataWeatherAPI.name;
-        // const id = dataWeatherAPI.id;
-        // const country = dataWeatherAPI.sys.country;
-        const state = getNameWeatherState(dataWeatherAPI)
-    
+const dataFormatFor = (dataobject) => {
+    const {code: status, main, wind, message} = dataobject;
+
+    if (status !== 404) {
+        const { humidity, temp } = main;
+        const { speed } = wind;
+
         return {
-            // city: {
-            //     name: name,
-            //     id,
-            //     country
-            // },
             data: {
                 temperature: convertKelvin(temp),
-                weatherState: state,
+                weatherState: getNameWeatherState(dataobject),
                 humidity: humidity,
                 wind: ` ${speed} m/s`
             }
         }
-        
+
     } else {
-        const name = dataWeatherAPI.message;
         return {
-            city: name,
+            city: message,
             data: {
                 temperature: convertKelvin(0),
                 weatherState: 'N/A',
@@ -69,4 +58,4 @@ const weatherDataFormat = (dataWeatherAPI) => {
 
 };
 
-export default weatherDataFormat;
+export default dataFormatFor;

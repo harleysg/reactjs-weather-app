@@ -9,8 +9,8 @@ import './App.css';
 /** @constants */
 import { citiesID } from "./constants/const.cityList";
 /** @componentes */
-import LocationList from "./componets/LocationList";
-import ForeCastExtended from './componets/ForeCastExtended';
+import LocationList from "./components/LocationList";
+import ForeCastExtended from './components/ForeCastExtended';
 
 class App extends Component {
 

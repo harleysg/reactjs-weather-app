@@ -11,7 +11,7 @@ import weatherDataFormat from "services/service.filterWeatherData";
 /**@components */
 import Location from "./Location";
 import WeatherData from "./Data";
-import MessageNotification from 'componets/MessageNotification';
+import MessageNotification from 'components/MessageNotification';
 /**@styles */
 import "./weather.css";
 // https://www.udemy.com/share/100054AkAad1lUQHQ=/?xref=E0AYcFhVQ3kJSV82AT0GJVUWTx4dChQ%2BVFE=

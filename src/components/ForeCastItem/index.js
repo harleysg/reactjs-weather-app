@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+/**@libraries */
+import CardHeader from "@material-ui/core/CardHeader";
+/**@components */
 import WeatherData from "../WeatherLocation/Data";
 
 const ForeCastItem = ({ weekDay, hour, data }) => (
     <div>
-        <h3>
-            {weekDay}. - {hour} hs
-        </h3>
+        <CardHeader className="c-location_card-header" title={weekDay} subheader={`${hour} hs`}></CardHeader>
         <WeatherData data={data}></WeatherData>
     </div>
 );

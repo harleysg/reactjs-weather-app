@@ -1,0 +1,11 @@
+.c-location {
+    position: relative;
+}
+.c-location_card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.c-location_card-header {
+    padding: 16px;
+}

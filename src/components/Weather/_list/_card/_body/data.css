@@ -1,0 +1,21 @@
+.c-weather_data{
+    /* padding: 1rem; */
+    display: grid;
+    grid-template: minmax(5rem, 6rem) minmax(5rem, 7rem) / 1fr;
+}
+.c-weatherData_temperature{ 
+    background-color: aliceblue;
+    display: inherit;
+    grid-template: 1fr / 1fr 1fr;
+}
+.c-weatherData_extraInfo { 
+    background-color: rgb(94, 179, 253);
+    display: inherit;
+    grid-template: 1fr / 1fr  1fr;
+}
+.c-weatherData_extraInfo > *,
+.c-weatherData_temperature > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

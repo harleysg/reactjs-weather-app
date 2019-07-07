@@ -595,8 +595,8 @@ const iconNames = {
     wu_snow: "wu_snow",
     wu_sunny: "wu_sunny",
     wu_tstorms: "wu_tstorms",
-    wu_unknown: "wu_unknown",
-}
+    wu_unknown: "wu_unknown"
+};
 const iconsWeather = {
     sun: iconNames["sun"],
     cloud: iconNames["cloud"],
@@ -624,8 +624,8 @@ const iconsWeather = {
     tornado: iconNames["tornado"],
     tsunami: iconNames["tsunami"],
     volcano: iconNames["volcano"],
-    windy: iconNames["windy"],
-}
+    windy: iconNames["windy"]
+};
 const othersIcons = {
     umbrella: iconNames["umbrella"],
     barometer: iconNames["barometer"],
@@ -633,8 +633,8 @@ const othersIcons = {
     celsius: iconNames["celsius"],
     fahrenheit: iconNames["fahrenheit"],
     degrees: iconNames["degrees"],
-    refresh: iconNames["refresh"],
-}
+    refresh: iconNames["refresh"]
+};
 
 module.exports = {
     iconNames,

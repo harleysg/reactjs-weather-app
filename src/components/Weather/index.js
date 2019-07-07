@@ -1,26 +1,25 @@
 import React, { Component } from "react";
-/**@libraries */
+import { connect } from "react-redux";
+/** @redux */
+import { setCity } from "actions";
+/** @libraries */
 import { Grid } from "react-flexbox-grid";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
-import { createStore } from "redux";
 /** @constants */
 import { citiesID } from "constants/const.cityList";
 /** @componentes */
 import WeatherList from "./_list";
 import ForeCastExtended from "./_foreCastExtended";
 
-const store = createStore(() => {},
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-export class Weather extends Component {
+class Weather_ extends Component {
     constructor() {
         super();
 
         this.state = {
             city: null,
-            isOpenModal: false
+            isOpenModal: false,
         };
     }
 
@@ -35,9 +34,9 @@ export class Weather extends Component {
     handleSelectionLocation = city => {
         this.setState({
             city,
-            isOpenModal: true
+            isOpenModal: true,
         });
-        store.dispatch({ type: "SET_CITY", value: city });
+        this.props.setCity(city);
     };
 
     render() {
@@ -71,3 +70,11 @@ export class Weather extends Component {
         );
     }
 }
+
+const mapDispatchToPropsActions = dispatch => ({
+    setCity: value => dispatch(setCity(value)),
+});
+
+const Weather = connect(null, mapDispatchToPropsActions)(Weather_)
+
+export default Weather;

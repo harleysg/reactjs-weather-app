@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 /** @redux */
 import { setCity } from "actions";
 /** @libraries */
@@ -9,17 +10,17 @@ import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 /** @constants */
 import { citiesID } from "constants/const.cityList";
-/** @componentes */
+/** @components */
 import WeatherList from "./_list";
 import ForeCastExtended from "./_foreCastExtended";
 
-class Weather_ extends Component {
+class WeatherComponent extends Component {
     constructor() {
         super();
 
         this.state = {
             city: null,
-            isOpenModal: false,
+            isOpenModal: false
         };
     }
 
@@ -34,7 +35,7 @@ class Weather_ extends Component {
     handleSelectionLocation = city => {
         this.setState({
             city,
-            isOpenModal: true,
+            isOpenModal: true
         });
         this.props.setCity(city);
     };
@@ -71,10 +72,15 @@ class Weather_ extends Component {
     }
 }
 
+WeatherComponent.propTypes = {
+    setCity: PropTypes.func.isRequired
+};
+
 const mapDispatchToPropsActions = dispatch => ({
-    setCity: value => dispatch(setCity(value)),
+    setCity: value => dispatch(setCity(value))
 });
 
-const Weather = connect(null, mapDispatchToPropsActions)(Weather_)
-
-export default Weather;
+export default connect(
+    null,
+    mapDispatchToPropsActions
+)(WeatherComponent);

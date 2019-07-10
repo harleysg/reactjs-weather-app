@@ -17,7 +17,7 @@ class WeatherListContainer extends Component {
             <WeatherList
                 cities={this.props.cities}
                 onSelectedLocation={this.handleWeatherList}
-            />
+            ></WeatherList>
         );
     }
 }

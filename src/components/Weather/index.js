@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-/** @libraries */
+/** @ui_libraries */
 import { Grid } from "react-flexbox-grid";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";

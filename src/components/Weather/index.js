@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-/** @redux */
-import { setCity } from "actions";
 /** @libraries */
 import { Grid } from "react-flexbox-grid";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 /** @constants */
 import { citiesID } from "constants/const.cityList";
 /** @components */
-import WeatherList from "./_list";
+import { WeatherListContainer } from "components/containers";
 import ForeCastExtended from "./_foreCastExtended";
 
 class WeatherComponent extends Component {
@@ -24,20 +20,19 @@ class WeatherComponent extends Component {
         };
     }
 
+    handleSelectionLocation = city => {
+        this.setState({
+            city,
+            isOpenModal: true
+        });
+    };
+
     handledModal = stateModal => {
         if (stateModal === false) {
             this.setState({ isOpenModal: false });
         } else {
             this.setState({ isOpenModal: true });
         }
-    };
-
-    handleSelectionLocation = city => {
-        this.setState({
-            city,
-            isOpenModal: true
-        });
-        this.props.setCity(city);
     };
 
     render() {
@@ -55,9 +50,10 @@ class WeatherComponent extends Component {
                     </Grid>
                 </AppBar>
                 <Grid>
-                    <WeatherList
+                    <WeatherListContainer
                         cities={citiesID}
-                        onSelectedLocation={this.handleSelectionLocation}
+                        setCity={() => {}}
+                        onSelectedCity={this.handleSelectionLocation}
                     />
                     {city ? (
                         <ForeCastExtended
@@ -72,15 +68,4 @@ class WeatherComponent extends Component {
     }
 }
 
-WeatherComponent.propTypes = {
-    setCity: PropTypes.func.isRequired
-};
-
-const mapDispatchToPropsActions = dispatch => ({
-    setCity: value => dispatch(setCity(value))
-});
-
-export default connect(
-    null,
-    mapDispatchToPropsActions
-)(WeatherComponent);
+export default WeatherComponent;

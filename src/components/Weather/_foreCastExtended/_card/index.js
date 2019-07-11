@@ -5,7 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 /**@components */
-import CardDataBody from "../../_list/_card/_body";
+import CardDataBody from "components/Weather/_card/_body";
 
 const ForeCastCard = ({ weekDay, hour, data }) => (
     <Card>

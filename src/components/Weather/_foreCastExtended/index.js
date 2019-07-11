@@ -20,7 +20,7 @@ import fetchService from "services/service.fetch";
 import bodyScrollService from "services/service.bodyScroll";
 import transformForcastQueryService from "services/service.transformForcastQuery";
 /** @Components */
-import ForeCastCard from "./_card";
+import ForeCastCard from "components/Weather/_card";
 
 class ForeCastExtended extends Component {
     constructor(props) {

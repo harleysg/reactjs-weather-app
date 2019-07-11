@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import WeatherCardData from "./_card";
+import WeatherCardData from "components/Weather/_card";
 
 import "./WeatherList.css";
 

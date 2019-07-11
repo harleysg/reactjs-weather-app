@@ -5,7 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 /** @constants */
-import { citiesID } from "constants/const.cityList";
+import { citiesList } from "constants/const.cityList";
 /** @components */
 import { WeatherListContainer } from "components/containers";
 import ForeCastExtended from "./_foreCastExtended";
@@ -51,7 +51,7 @@ class WeatherComponent extends Component {
                 </AppBar>
                 <Grid>
                     <WeatherListContainer
-                        cities={citiesID}
+                        cities={citiesList}
                         setCity={() => {}}
                         onSelectedCity={this.handleSelectionLocation}
                     />

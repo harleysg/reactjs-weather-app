@@ -3,7 +3,8 @@ import { createStore } from "redux";
 import { cityReducer } from "reducers";
 
 const initialState = {
-    isOpenModal: true
+    isOpenModal: true,
+    city: null
 };
 
 export const store = createStore(

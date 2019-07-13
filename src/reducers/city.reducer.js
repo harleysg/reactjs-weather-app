@@ -1,12 +1,10 @@
-import SET_CITY from "actions";
+import { SET_CITY } from "actions";
 
-export default (state, action) => {
+export default (state = {}, action) => {
     switch (action.type) {
         case SET_CITY:
-            return { ...state, cityID: action.value };
-
+            return { ...state, cityID: action.payload };
         default:
-            break;
+            return state;
     }
-    return state;
 };

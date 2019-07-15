@@ -21,7 +21,6 @@ class WeatherCardData extends Component {
         super(props);
 
         const { city } = props;
-
         this.state = {
             error: null,
             notice: {},
@@ -55,13 +54,13 @@ class WeatherCardData extends Component {
     render() {
         const { onWeatherLocationClick } = this.props;
         const { city, data, error, notice } = this.state;
-
+        const { name } = city;
         return (
             <Card
                 onClick={onWeatherLocationClick}
                 className="c-weather_location-item c-location_card"
             >
-                <CardDataHeader city={city.name} />
+                <CardDataHeader city={name} />
                 <CardContent className="c-location_card-body">
                     {error ? (
                         <AlertComponent msg={notice} />
@@ -76,9 +75,9 @@ class WeatherCardData extends Component {
     }
 }
 
-WeatherCardData.protoTypes = {
+WeatherCardData.propTypes = {
     city: PropTypes.object.isRequired /** @Object */,
-    weatherLocationOnClick: PropTypes.func.isRequired /** @Function */
+    weatherLocationOnClick: PropTypes.func /** @Function */
 };
 
 export default WeatherCardData;

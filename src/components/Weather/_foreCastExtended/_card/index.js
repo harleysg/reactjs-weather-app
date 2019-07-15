@@ -8,7 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardDataBody from "components/Weather/_card/_body";
 
 const ForeCastCard = ({ weekDay, hour, data }) => (
-    <Card>
+    <Card className="c-weather_location-item c-location_card">
         <CardHeader
             className="c-location_card-header"
             title={weekDay}

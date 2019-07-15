@@ -14,7 +14,6 @@ class WeatherList extends Component {
     }
 
     handelWeatherLocationClick = city => {
-        console.log("handelWeatherLocationClick ", city);
         this.props.onSelectedLocation(city);
     };
 
@@ -36,7 +35,7 @@ class WeatherList extends Component {
         const { cities } = this.state;
         return (
             <div className="c-weather_location">
-                {this.mapCitiesToComponents(cities)}
+                {cities ? this.mapCitiesToComponents(cities) : "loading..."}
             </div>
         );
     }

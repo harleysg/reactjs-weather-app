@@ -12,12 +12,13 @@ class WeatherListContainer extends Component {
         this.props.setCity(city);
         this.props.onSelectedCity(city);
     };
+
     render() {
         return (
             <WeatherList
                 cities={this.props.cities}
                 onSelectedLocation={this.handleWeatherList}
-            ></WeatherList>
+            />
         );
     }
 }

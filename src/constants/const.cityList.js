@@ -1,4 +1,4 @@
-const cityList = [
+export const citiesList = [
     {
         id: 5128638,
         name: "New York",
@@ -154,7 +154,7 @@ const cityList = [
     }
 ];
 
-const cities = [
+export const cities = [
     "new york,usa",
     "miami,usa",
     "roma,it",
@@ -164,8 +164,3 @@ const cities = [
     "Buenos aires,ar",
     "mexico,mx"
 ];
-
-module.exports = {
-    citiesID: cityList,
-    citiesName: cities
-};

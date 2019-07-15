@@ -6,8 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 /** @components */
-import { WeatherListContainer } from "components/containers";
-import ForeCastExtended from "./_foreCastExtended";
+import {
+    WeatherListContainer,
+    ForeCastExtendedContainer
+} from "components/containers";
+import ForeCastExtended from "components/Weather/_foreCastExtended";
 
 class WeatherComponent extends Component {
     constructor(props) {
@@ -55,11 +58,18 @@ class WeatherComponent extends Component {
                         onSelectedCity={this.handleSelectionLocation}
                     />
                     {city ? (
-                        <ForeCastExtended
-                            city={city}
-                            isOpen={isOpenModal}
-                            onHandledModal={this.handledModal}
-                        />
+                        <div>
+                            <ForeCastExtendedContainer
+                                city={city}
+                                isOpen={isOpenModal}
+                                onHandledModal={this.handledModal}
+                            />
+                            {/* <ForeCastExtended
+                                city={city}
+                                isOpen={isOpenModal}
+                                onHandledModal={this.handledModal}
+                            /> */}
+                        </div>
                     ) : null}
                 </Grid>
             </div>

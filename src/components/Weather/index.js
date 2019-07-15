@@ -4,15 +4,14 @@ import { Grid } from "react-flexbox-grid";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
-/** @constants */
-import { citiesList } from "constants/const.cityList";
+import PropTypes from "prop-types";
 /** @components */
 import { WeatherListContainer } from "components/containers";
 import ForeCastExtended from "./_foreCastExtended";
 
 class WeatherComponent extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             city: null,
@@ -36,8 +35,8 @@ class WeatherComponent extends Component {
     };
 
     render() {
-        const { city } = this.state;
-        const { isOpenModal } = this.state;
+        const { city, isOpenModal } = this.state;
+        const { cities } = this.props;
         return (
             <div className="c-weather" data-open={isOpenModal}>
                 <AppBar position="sticky">
@@ -51,13 +50,13 @@ class WeatherComponent extends Component {
                 </AppBar>
                 <Grid>
                     <WeatherListContainer
-                        cities={citiesList}
+                        cities={cities}
                         setCity={() => {}}
                         onSelectedCity={this.handleSelectionLocation}
                     />
                     {city ? (
                         <ForeCastExtended
-                            cityID={city.id}
+                            city={city}
                             isOpen={isOpenModal}
                             onHandledModal={this.handledModal}
                         />
@@ -67,5 +66,9 @@ class WeatherComponent extends Component {
         );
     }
 }
+
+WeatherComponent.propTypes = {
+    cities: PropTypes.array.isRequired /**@param array */
+};
 
 export default WeatherComponent;

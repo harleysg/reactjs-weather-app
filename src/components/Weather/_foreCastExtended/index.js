@@ -20,29 +20,27 @@ import fetchService from "services/service.fetch";
 import bodyScrollService from "services/service.bodyScroll";
 import transformForcastQueryService from "services/service.transformForcastQuery";
 /** @Components */
-import ForeCastCard from "components/Weather/_card";
+import ForeCastCard from "./_card";
 
 class ForeCastExtended extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            isActive: false,
             city: {
-                cityId: this.props.cityID,
-                name: "",
-                country: "",
+                id: props.city.id,
+                name: props.city.name,
+                country: props.city.country,
                 data: null
             }
         };
     }
 
     handleCloseModal = () => {
-        this.setState({ isActive: false });
         this.props.onHandledModal(false);
     };
 
-    renderForecasItemDays(data) {
+    renderForecasItemDays(city) {
+        const { data } = city;
         return data.map(day => (
             <ForeCastCard
                 key={`${day.weekDay}-${day.hour}`}
@@ -54,17 +52,13 @@ class ForeCastExtended extends Component {
     }
 
     handleFetchForUpdate(idCity) {
-        console.log("nuevo fetch con el dato", idCity);
         fetchService(`${url_forecast}?id=${idCity}&appid=${api_key}`)
             .then(resp => {
                 const data = transformForcastQueryService(resp);
                 this.setState({
-                    isActive: true,
                     city: {
-                        data: data,
-                        cityId: idCity,
-                        name: resp.city.name,
-                        country: resp.city.country
+                        ...this.state.city,
+                        data: data
                     }
                 });
             })
@@ -72,17 +66,22 @@ class ForeCastExtended extends Component {
     }
 
     componentDidMount() {
-        const { cityId } = this.state.city;
-        this.handleFetchForUpdate(cityId);
+        const { id } = this.state.city;
+        this.handleFetchForUpdate(id);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { cityID, isOpen } = this.props;
+        const { isOpen } = this.props;
+        const { id } = this.props.city;
 
-        if (prevProps.cityID !== cityID) {
-            console.log("el props cityID ha cambiado a ", cityID);
-            this.setState({ isActive: true, city: { data: null } });
-            this.handleFetchForUpdate(cityID);
+        if (prevProps.city.id !== id) {
+            console.log(
+                "forCastExtended/componentDidUpdate",
+                "el props id ha cambiado a ",
+                id
+            );
+            this.setState({ city: { ...this.state.city, data: null } });
+            this.handleFetchForUpdate(id);
         }
         if (prevProps.isOpen !== isOpen) {
             bodyScrollService(isOpen);
@@ -92,7 +91,7 @@ class ForeCastExtended extends Component {
     render() {
         const { data, name, country } = this.state.city;
         const { isOpen } = this.props;
-        bodyScrollService(isOpen);
+        bodyScrollService(isOpen); /**Open Modal, @service */
         return (
             <div className={`c-weather_details${isOpen ? " is-visible" : ""}`}>
                 <div
@@ -126,9 +125,7 @@ class ForeCastExtended extends Component {
                                 </Grid>
                             </AppBar>
                             <Grid className={`c-weather_details-content`}>
-                                {data
-                                    ? this.renderForecasItemDays(data)
-                                    : "cargando...."}
+                                {this.renderForecasItemDays(this.state.city)}
                             </Grid>
                         </Fragment>
                     ) : (
@@ -156,7 +153,7 @@ class ForeCastExtended extends Component {
 }
 
 ForeCastExtended.propTypes = {
-    cityID: PropTypes.number.isRequired,
+    city: PropTypes.object.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onHandledModal: PropTypes.func.isRequired
 };

@@ -1,1 +1,1 @@
-export { default as cityReducer } from "./city.reducer";
+export { default as reducers } from "./city.reducer";

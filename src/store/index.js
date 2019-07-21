@@ -1,14 +1,14 @@
 import { createStore } from "redux";
 /** @reducers */
-import { cityReducer } from "reducers";
+import { reducers } from "reducers";
 
 const initialState = {
-    isOpenModal: true,
+    isOpenModal: false,
     city: null
 };
 
 export const store = createStore(
-    cityReducer,
+    reducers,
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

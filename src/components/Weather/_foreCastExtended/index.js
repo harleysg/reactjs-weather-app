@@ -1,16 +1,10 @@
-import React, { Component, Fragment } from "react";
-
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid } from "react-flexbox-grid";
 
 import "./ForeCastExtended.css";
 
-/**
- * @components material-ui
- */
-import AppBar from "@material-ui/core/AppBar";
+/** @ui_libraries */
 import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -21,17 +15,17 @@ import bodyScrollService from "services/service.bodyScroll";
 import transformForcastQueryService from "services/service.transformForcastQuery";
 /** @Components */
 import ForeCastCard from "./_card";
+import { MUHeaderSticky } from "components/Weather/_header";
 
+/* TODO: usar Hooks
+ **  revisión de nuevos metodos useState, useEffect
+ **  convertir a componente funcional
+ */
 class ForeCastExtended extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: {
-                id: props.city.id,
-                name: props.city.name,
-                country: props.city.country,
-                data: null
-            }
+            data: null
         };
     }
 
@@ -39,8 +33,7 @@ class ForeCastExtended extends Component {
         this.props.onHandledModal(false);
     };
 
-    renderForecasItemDays(city) {
-        const { data } = city;
+    renderForecasItemDays(data) {
         return data.map(day => (
             <ForeCastCard
                 key={`${day.weekDay}-${day.hour}`}
@@ -55,19 +48,16 @@ class ForeCastExtended extends Component {
         fetchService(`${url_forecast}?id=${idCity}&appid=${api_key}`)
             .then(resp => {
                 const data = transformForcastQueryService(resp);
-                this.setState({
-                    city: {
-                        ...this.state.city,
-                        data: data
-                    }
-                });
+                this.setState({ data });
             })
             .catch(e => console.error(e));
     }
 
     componentDidMount() {
-        const { id } = this.state.city;
+        const { isOpen, city } = this.props;
+        const { id } = city;
         this.handleFetchForUpdate(id);
+        bodyScrollService(isOpen); /**Open Modal, @service */
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -75,12 +65,7 @@ class ForeCastExtended extends Component {
         const { id } = this.props.city;
 
         if (prevProps.city.id !== id) {
-            console.log(
-                "forCastExtended/componentDidUpdate",
-                "el props id ha cambiado a ",
-                id
-            );
-            this.setState({ city: { ...this.state.city, data: null } });
+            this.setState({ data: null });
             this.handleFetchForUpdate(id);
         }
         if (prevProps.isOpen !== isOpen) {
@@ -89,9 +74,9 @@ class ForeCastExtended extends Component {
     }
 
     render() {
-        const { data, name, country } = this.state.city;
-        const { isOpen } = this.props;
-        bodyScrollService(isOpen); /**Open Modal, @service */
+        const { data } = this.state;
+        const { isOpen, city } = this.props;
+        const { name, country } = city;
         return (
             <div className={`c-weather_details${isOpen ? " is-visible" : ""}`}>
                 <div
@@ -99,53 +84,28 @@ class ForeCastExtended extends Component {
                     onClick={this.handleCloseModal}
                 />
                 <div className={`c-weather_details-body`}>
-                    {data ? (
-                        <Fragment>
-                            <AppBar position="sticky">
-                                <Grid>
-                                    <Toolbar>
-                                        <Typography
-                                            variant="subtitle1"
-                                            color="inherit"
-                                            className="u-flexGrow"
-                                        >
-                                            {data
-                                                ? `${name}, ${country}`
-                                                : "cargando...."}
-                                        </Typography>
-                                        <IconButton
-                                            edge="end"
-                                            color="inherit"
-                                            aria-label="Menu"
-                                            onClick={this.handleCloseModal}
-                                        >
-                                            <Icon>close</Icon>
-                                        </IconButton>
-                                    </Toolbar>
-                                </Grid>
-                            </AppBar>
-                            <Grid className={`c-weather_details-content`}>
-                                {this.renderForecasItemDays(this.state.city)}
-                            </Grid>
-                        </Fragment>
-                    ) : (
-                        <Fragment>
-                            <Grid>
-                                <Toolbar>
-                                    <Typography
-                                        variant="h5"
-                                        color="inherit"
-                                        className="u-flexGrow"
-                                    >
-                                        cargando....
-                                    </Typography>
-                                </Toolbar>
-                            </Grid>
-                            <Grid className={`c-weather_details-content`}>
-                                <LinearProgress />
-                            </Grid>
-                        </Fragment>
-                    )}
+                    <MUHeaderSticky>
+                        <Typography
+                            variant="subtitle1"
+                            color="inherit"
+                            className="u-flexGrow"
+                        >
+                            {data ? `${name}, ${country}` : `Cargando...`}
+                        </Typography>
+                        {data && (
+                            <IconButton
+                                edge="end"
+                                color="inherit"
+                                aria-label="Menu"
+                                onClick={this.handleCloseModal}
+                            >
+                                <Icon>close</Icon>
+                            </IconButton>
+                        )}
+                    </MUHeaderSticky>
+                    <main className={`c-weather_details-content`}>
+                        {data ? this.renderForecasItemDays(data) : <LinearProgress />}
+                    </main>
                 </div>
             </div>
         );

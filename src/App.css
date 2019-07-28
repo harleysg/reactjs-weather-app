@@ -1,3 +1,28 @@
 body.no-scrolling {
     overflow: hidden;
 }
+
+.o-wrapper {
+    min-width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.u-theme_dark {
+    background-color: #263238;
+    color: white;
+}
+
+.u-theme_dark .MuiPaper-root-10 {
+    background-color: #37474f !important;
+}
+.u-theme_dark .MuiTypography-headline-46 {
+    color: white;
+}
+.u-theme_dark .MuiTypography-colorTextSecondary-74 {
+    color: white;
+}

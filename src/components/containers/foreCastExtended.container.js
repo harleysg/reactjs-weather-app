@@ -1,39 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 /** @redux */
 import { connect } from "react-redux";
+import { toggleModal } from "actions";
 /** @components */
 import ForeCastExtended from "components/Weather/_foreCastExtended";
 
-class ForeCastExtendedContainer extends Component {
-    handledModal = stateModal => {
+const ForeCastExtendedContainer = props => {
+    const { city, modalStatus } = props;
+    const handledModal = stateModal => {
         if (stateModal === false) {
-            // this.setState({ isOpenModal: false });
+            props.toggleModal(stateModal);
         } else {
-            // this.setState({ isOpenModal: true });
+            props.toggleModal(true);
         }
     };
-    render() {
-        const { city, isOpenModal } = this.props;
-        return (
+    return (
+        city && (
             <ForeCastExtended
                 city={city}
-                isOpen={isOpenModal}
-                onHandledModal={this.handledModal}
+                isOpen={modalStatus}
+                onHandledModal={handledModal}
             />
-        );
-    }
-}
-
-ForeCastExtendedContainer.propTypes = {
-    city: PropTypes.object.isRequired,
-    isOpenModal: PropTypes.bool.isRequired,
-    onHandledModal: PropTypes.func.isRequired
+        )
+    );
 };
 
-const mapStateToProps = ({ city, isOpenModal }) => ({ city, isOpenModal });
+ForeCastExtendedContainer.propTypes = {
+    city: PropTypes.object,
+    modalStatus: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = state => ({ modalStatus: state.isOpenModal, city: state.city });
+const mapDispatchToProps = dispatch => ({
+    toggleModal: buleano => dispatch(toggleModal(buleano))
+});
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(ForeCastExtendedContainer);

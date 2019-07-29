@@ -21,9 +21,9 @@ const ComponentConnector = connect(
 )(WeatherListContainer);
 
 WeatherListContainer.propTypes = {
-    setCity: PropTypes.func.isRequired,
-    toggleModal: PropTypes.func.isRequired,
-    cities: PropTypes.array.isRequired /** valor recibido para pasar a WeatherList */
+    setCity: PropTypes.func.isRequired /** Prop generado en @function connect(...) */,
+    toggleModal: PropTypes.func.isRequired /** Prop generado en @function connect(...) */,
+    cities: PropTypes.array.isRequired /** Prop recibido en WeatherListContainer*/
 };
 
 export default ComponentConnector;

@@ -16,7 +16,7 @@ const WeatherComponent = props => {
                 </Typography>
             </MUHeaderSticky>
             <main className="o-wrapper">
-                <WeatherListContainer cities={cities} setCity={() => {}} />
+                <WeatherListContainer cities={cities} />
                 <ForeCastExtendedContainer />
             </main>
         </div>

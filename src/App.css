@@ -3,9 +3,9 @@ body.no-scrolling {
 }
 
 .o-wrapper {
-    min-width: 100vw;
     width: 100%;
-    box-sizing: border-box;
+    min-height: 100vh;
+
     margin-left: auto;
     margin-right: auto;
     padding-right: 8px;

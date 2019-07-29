@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 /** @redux */
 import { connect } from "react-redux";
-import { setCity, toggleModal } from "actions";
+import { setSelectedCityBy, toggleModal } from "actions";
 
 /** @components */
 import WeatherList from "./../Weather/_list";
 
 const mapDispatchToPropsActions = dispatch => ({
-    setCity: value => dispatch(setCity(value)),
+    setCity: value => dispatch(setSelectedCityBy(value)),
     toggleModal: value => dispatch(toggleModal(value))
 });
 

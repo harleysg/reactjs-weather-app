@@ -5,9 +5,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 /**@services */
-import weatherAPI from "services/getURLWeatherByCity";
-import fetchService from "services/service.fetch";
-import weatherDataFormat from "services/service.filterWeatherData";
+import { fetchWeatherDataBy } from "services";
 /**@components */
 import CardDataHeader from "./_header";
 import CardDataBody from "./_body";
@@ -30,13 +28,13 @@ class WeatherCardData extends Component {
     }
 
     handleUpdateData = () => {
-        const apiWeatherURL = weatherAPI.get.weatherCity(this.state.city.id);
-        fetchService(apiWeatherURL)
+        const idCity = this.state.city.id;
+        fetchWeatherDataBy(idCity)
             .then(data => {
-                this.setState(weatherDataFormat(data));
+                this.setState(data);
             })
             .catch(error => {
-                return this.setState({
+                this.setState({
                     error: true,
                     notice: {
                         type: "Error",
